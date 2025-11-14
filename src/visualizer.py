@@ -2,6 +2,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 
+MONTH_ORDER = ["Jan","Feb","Mar","Apr","May","Jun",
+               "Jul","Aug","Sep","Oct","Nov","Dec"]
+
 def plot_time_series(df):
     sns.lineplot(data=df, x='Timestamp', y='GHI', label='GHI', errorbar=None)
     sns.lineplot(data=df, x='Timestamp', y='DNI', label='DNI', errorbar=None)
@@ -18,8 +21,7 @@ def plot_corr_heatmap(df, cols):
     plt.tight_layout()
     plt.show()
 
-MONTH_ORDER = ["Jan","Feb","Mar","Apr","May","Jun",
-               "Jul","Aug","Sep","Oct","Nov","Dec"]
+
 
 def plot_monthly_metrics(df, metrics=["GHI","DNI","DHI","Tamb"]):
     """Plot monthly mean values for multiple metrics for a single country."""
@@ -39,6 +41,7 @@ def plot_monthly_metrics(df, metrics=["GHI","DNI","DHI","Tamb"]):
     plt.ylabel("Average Value")
     plt.tight_layout()
     plt.show()
+    
 def plot_daily_trends(df, date_col='Date'):
     """
     Plots daily average GHI, DNI, DHI, and Tamb.
