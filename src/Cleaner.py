@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from scipy import stats
 
 class Cleaner:
@@ -10,3 +11,7 @@ class Cleaner:
         if 'Cleaning' in self.df.columns:
             self.df['Cleaning'] = self.df['Cleaning'].astype('category')
         return self.df
+    def remove_outliers(self, cols, threshold=3):
+        z = np.abs(stats.zscore(self.df[cols], nan_policy="omit"))
+        mask = (z < threshold).all(axis=1)
+        return self.df.loc[mask]
